@@ -3,9 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const SingleCategory = ({ item }) => {
-    // const showcategoryproducts=()=>{
-
-    // }
     return (
         <CardActionArea>
             <Card
@@ -33,7 +30,7 @@ const SingleCategory = ({ item }) => {
                         bottom: 0,
                     }}
                 >
-                    <Link to={`category/${item?.title}/${item?.id}`}>
+                    <Link to={`category/${item?.title}/${item?.id}`} style={{ textDecoration: 'none', color: 'white' }}>
                         <Typography variant="h4">{item?.title}</Typography>
                     </Link>
                 </Box>

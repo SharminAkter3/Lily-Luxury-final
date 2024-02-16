@@ -2,8 +2,9 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import SingleProduct from "./SingleProduct";
 import DoubleArrowSharpIcon from "@material-ui/icons/DoubleArrowSharp";
+import { Link } from "react-router-dom";
 
-const AllProducts = ({ products, showall = false }) => {
+const AllProducts = ({ products, showall = false, categorytitle, categoryid }) => {
     return (
         <Grid
             style={{
@@ -40,13 +41,16 @@ const AllProducts = ({ products, showall = false }) => {
                         alignItems: "center",
                     }}
                 >
-                    <Button>
-                        <Typography>See More</Typography>
-                        <DoubleArrowSharpIcon />
-                    </Button>
+                    <Link to={`category/${categorytitle}/${categoryid}`}>
+                        <Button>
+                            <Typography>See More</Typography>
+                            <DoubleArrowSharpIcon />
+                        </Button>
+                    </Link>
                 </Grid>
-            )}
-        </Grid>
+            )
+            }
+        </Grid >
     );
 };
 

@@ -28,7 +28,7 @@ class SingleCategoryView(APIView):
         data = []
         for cata in category_serializer:
             product_obj = Flower.objects.filter(category=cata["id"])
-            cata["products"] = FlowerSerializer(
+            cata["flowers"] = FlowerSerializer(
                 product_obj, many=True, context={"request": request}
             ).data
             data.append(cata)
