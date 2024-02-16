@@ -42,3 +42,28 @@ class CategorisView(APIView):
             categoris_obj, many=True, context={"request": request}
         ).data
         return Response(category_serializer)
+
+
+class SingleProductView(APIView):
+    def get(self, request, pk):
+        product_obj = Flower.objects.filter(id=pk)
+        data = []
+
+        product_serializer = SingleFlowerSerializer(
+            product_obj, many=True, context={"request": request}
+        ).data
+
+        for prod in product_serializer:
+            prod_view = FlowerView.objects.filter(flower=prod["id"]).first()
+            # print("prod_view", prod_view)
+            if prod_view:
+                prod["view"] = prod_view.view
+            else:
+                prod["view"] = 0
+
+            prod_review = Review.objects.filter(flower=prod["id"])
+            prod_review_serializer = ReviewSerializer(prod_review, many=True).data
+            prod["review"] = prod_review_serializer
+
+            data.append(prod)
+        return Response(data)

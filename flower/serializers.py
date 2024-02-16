@@ -13,6 +13,17 @@ class FlowerSerializer(serializers.ModelSerializer):
         return request.url("image")
 
 
+class SingleFlowerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Flower
+        fields = "__all__"
+        depth = 1
+
+    def imageurl(self, obj):
+        request = self.context.get("request")
+        return request.url("image")
+
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -21,3 +32,10 @@ class CategorySerializer(serializers.ModelSerializer):
         def imageurl(self, obj):
             request = self.context.get("request")
             return request.url("image")
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ["id", "customer", "title"]
+        depth = 1
