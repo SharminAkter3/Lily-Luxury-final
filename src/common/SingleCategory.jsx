@@ -1,7 +1,11 @@
 import { Box, Card, CardActionArea, Typography } from '@material-ui/core';
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const SingleCategory = ({ item }) => {
+    // const showcategoryproducts=()=>{
+
+    // }
     return (
         <CardActionArea>
             <Card
@@ -29,7 +33,9 @@ const SingleCategory = ({ item }) => {
                         bottom: 0,
                     }}
                 >
-                    <Typography variant="h4">{item?.title}</Typography>
+                    <Link to={`category/${item?.title}/${item?.id}`}>
+                        <Typography variant="h4">{item?.title}</Typography>
+                    </Link>
                 </Box>
             </Card>
         </CardActionArea>
