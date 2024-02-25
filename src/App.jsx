@@ -4,6 +4,7 @@ import HomePage from "./page/HomePage";
 import Navbar from "./components/Navbar";
 import SingleCategoryProducts from "./page/SingleCategoryProducts";
 import ProductDetails from "./page/ProductDetails";
+import SearchResultPage from "./page/SearchResultPage";
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/category/:title/:id" element={<SingleCategoryProducts />} />
         <Route exact path="/flower/:title/:id" element={<ProductDetails />} />
+        <Route exact path="/query/:q" element={<SearchResultPage />} />
 
       </Routes>
     </BrowserRouter>

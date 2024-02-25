@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.db.models import Q
 from .models import *
 from .serializers import *
+from django.utils import timezone
 
 
 class CategoryProductView(APIView):
@@ -107,3 +109,28 @@ class MostViewsProducts(APIView):
             p_obj, many=True, context={"request": request}
         ).data
         return Response(p_obj_data)
+
+
+class SearchView(APIView):
+    def get(self, request, q):
+        data = {}
+        posts_lookup = (
+            Q(title__icontains=q)
+            | Q(details__icontains=q)
+            | Q(tegs__icontains=q)
+            | Q(price__icontains=q)
+        )
+        prod_obj = Flower.objects.filter(time__lte=timezone.now()).filter(posts_lookup)
+        data["flowers"] = FlowerSerializer(
+            prod_obj, many=True, context={"request": request}
+        ).data
+        category_lookup = Q(title__icontains=q) | Q(details__icontains=q)
+        category_obj = Category.objects.filter(date__lte=timezone.now()).filter(
+            category_lookup
+        )
+        data["category"] = CategorySerializer(
+            category_obj, many=True, context={"request": request}
+        ).data
+
+        print(prod_obj)
+        return Response(data)
