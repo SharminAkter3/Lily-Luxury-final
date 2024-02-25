@@ -24,7 +24,7 @@ const CategorysName = () => {
         getCategoris();
     }, []);
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{ padding: '10px', marginTop: '20px', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', }}>
 
             <Headline title="All" subtitle="Categories" />
 

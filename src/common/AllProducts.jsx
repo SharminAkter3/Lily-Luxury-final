@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 
 const AllProducts = ({ products, showall = false, categorytitle, categoryid }) => {
     return (
-        <Grid
-            style={{
-                marginTop: "15px",
-            }}
+        <Grid style={{ padding: '10px', marginTop: '20px', marginBottom: '20px', borderRadius: '10px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', }}
             container
             spacing={2}
         >

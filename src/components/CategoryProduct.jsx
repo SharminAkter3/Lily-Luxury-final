@@ -24,7 +24,7 @@ const CategoryProduct = () => {
         getCategoryProducts();
     }, []);
     return (
-        <Grid container direction="column">
+        <Grid container direction="column" >
             {categoryProducts?.map((item, i) => (
                 <Box key={i} container="div">
                     <>
