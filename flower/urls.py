@@ -11,4 +11,5 @@ urlpatterns = [
     path("trandingflower/", TrandingProductsView.as_view()),
     path("sliders/", SliderView.as_view()),
     path("addflowerview/", AddViewProduct.as_view()),
+    path("most_views_flower/", MostViewsProducts.as_view()),
 ]

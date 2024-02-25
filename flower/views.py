@@ -100,9 +100,10 @@ class AddViewProduct(APIView):
         return Response({"error": False, "message": "Success"})
 
 
-# class MostViewsProducts(APIView):
-#     def get(self, request):
-#         p_obj = ProductView.objects.all().order_by('-view')[:12]
-#         p_obj_data = ProductViewSerializer(
-#             p_obj, many=True, context={'request': request}).data
-#         return Response(p_obj_data)
+class MostViewsProducts(APIView):
+    def get(self, request):
+        p_obj = FlowerView.objects.all().order_by("-view")[:12]
+        p_obj_data = ProductViewSerializer(
+            p_obj, many=True, context={"request": request}
+        ).data
+        return Response(p_obj_data)

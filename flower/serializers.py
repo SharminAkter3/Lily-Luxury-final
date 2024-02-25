@@ -63,3 +63,17 @@ class SliderSerializer(serializers.ModelSerializer):
     def getimage(self, *args, **kwargs):
         request = self.context.get("request")
         return request.url("image")
+
+
+class ProductViewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FlowerView
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        request = self.context.get("request")
+        response["flower"] = FlowerSerializer(
+            instance.flower, context={"request": request}
+        ).data
+        return response
