@@ -39,3 +39,27 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ["id", "customer", "title"]
         depth = 1
+
+
+class TrendingProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrendingProduct
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        request = self.context.get("request")
+        response["flowers"] = FlowerSerializer(
+            instance.flowers, context={"request": request}
+        ).data
+        return response
+
+
+# class SliderSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Slider
+#         fields = "__all__"
+
+#     def getimage(self, *args, **kwargs):
+#         request = self.context.get('request')
+#         return request.url(image)
