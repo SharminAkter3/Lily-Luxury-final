@@ -78,9 +78,10 @@ class TrandingProductsView(APIView):
         return Response(product_serializer)
 
 
-# class SliderView(APIView):
-#     def get(self, request):
-#         slider_obj = Slider.objects.all()
-#         slider_serializer = SliderSerializer(
-#             slider_obj, many=True, context={'request': request}).data
-#         return Response(slider_serializer)
+class SliderView(APIView):
+    def get(self, request):
+        slider_obj = Slider.objects.all()
+        slider_serializer = SliderSerializer(
+            slider_obj, many=True, context={"request": request}
+        ).data
+        return Response(slider_serializer)

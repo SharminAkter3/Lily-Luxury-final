@@ -9,4 +9,5 @@ urlpatterns = [
     path("singlecategories/<int:pk>/", SingleCategoryView.as_view()),
     path("singleflower/<int:pk>/", SingleProductView.as_view()),
     path("trandingflower/", TrandingProductsView.as_view()),
+    path("sliders/", SliderView.as_view()),
 ]

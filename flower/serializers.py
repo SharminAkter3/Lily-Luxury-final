@@ -55,11 +55,11 @@ class TrendingProductSerializer(serializers.ModelSerializer):
         return response
 
 
-# class SliderSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Slider
-#         fields = "__all__"
+class SliderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Slider
+        fields = "__all__"
 
-#     def getimage(self, *args, **kwargs):
-#         request = self.context.get('request')
-#         return request.url(image)
+    def getimage(self, *args, **kwargs):
+        request = self.context.get("request")
+        return request.url("image")
