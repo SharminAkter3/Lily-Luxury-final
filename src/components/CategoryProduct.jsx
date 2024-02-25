@@ -14,7 +14,7 @@ const CategoryProduct = () => {
                 method: "GET",
             })
                 .then((response) => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     setCategoryProducts(response.data);
                 })
                 .catch((error) => {
