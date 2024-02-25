@@ -16,12 +16,28 @@ const ProductDetails = () => {
                 url: `${domain}/api/singleflower/${id}/`,
                 method: 'GET'
             }).then(response => {
-                console.log(response.data[0]);
+                // console.log(response.data[0]);
                 setFlower(response.data[0])
             })
         }
         getproductdetailse()
     }, [])
+
+    useEffect(() => {
+        const addproductview = async () => {
+            await axios({
+                url: `${domain}/api/addflowerview/`,
+                method: 'POST',
+                data: {
+                    'id': id
+                }
+            }).then(response => {
+                console.log("ProductDetails", response.data);
+            })
+        }
+        addproductview()
+    }, [])
+
     return (
         <Container style={{
             padding: '30px',
