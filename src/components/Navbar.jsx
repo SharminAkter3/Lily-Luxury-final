@@ -46,7 +46,7 @@ const Navbar = () => {
                 </Grid>
 
                 {/* <Button color='inherit' onClick={() => { history.push('/login') }} >Login</Button>  */}
-                <Button color='inherit' style={{ backgroundColor: 'white', color: '#a32d58', padding: '5px', fontWeight: 'bold' }}>Login</Button>
+                <Button color='inherit' style={{ backgroundColor: 'white', color: '#a32d58', padding: '5px', fontWeight: 'bold' }} onClick={() => { navigate('/login') }}>Login</Button>
 
 
 
