@@ -11,13 +11,26 @@ import { useStateValue } from '../state/stateProvider';
 
 
 const Navbar = () => {
-    const [profile, { }] = useStateValue();
+    const [{ profile }, { }] = useStateValue();
     console.log('Navbar===', profile);
     const [text, setText] = useState('');
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
     const search = () => {
         navigate(`/query/${text}`);
+    }
+
+    const logoutnow = () => {
+        window.localStorage.clear()
+        window.location.href = '/';
+    }
+
+    const orderpage = () => {
+        navigate('/orders')
+    }
+
+    const profilepage = () => {
+        navigate(`/profile/${profile?.username}`)
     }
 
 
@@ -45,43 +58,44 @@ const Navbar = () => {
                             <SearchIcon />
                         </IconButton>
                     </Paper>
-
                 </Grid>
 
-                {/* <Button color='inherit' onClick={() => { history.push('/login') }} >Login</Button>  */}
-                <Button color='inherit' style={{ backgroundColor: 'white', color: '#a32d58', padding: '5px', fontWeight: 'bold' }} onClick={() => { navigate('/login') }}>Login</Button>
-
-
-
-                <IconButton color="inherit" style={{ backgroundColor: '#a32d58', color: 'white', marginLeft: '10px', padding: '5px' }}>
-                    <Badge badgeContent="3" color="secondary">
-                        <ShoppingCartIcon />
-                    </Badge>
-                </IconButton>
-
-
-
-                <IconButton onClick={() => setShowMenu(true)} color="inherit" style={{ backgroundColor: '#a32d58', color: 'white', marginLeft: '10px', padding: '5px' }}>
-                    <AccountCircleRoundedIcon />
-                </IconButton>
-
                 {
-                    showMenu &&
-                    <ClickAwayListener onClickAway={() => setShowMenu(false)}>
-                        <Card style={{
-                            position: 'fixed',
-                            top: '60px',
-                            right: '10px'
-                        }}>
-                            <MenuItem style={{ color: '#a32d58', fontWeight: 'bold' }}>Profile</MenuItem>
-                            <MenuItem style={{ color: '#a32d58', fontWeight: 'bold' }}>Logout</MenuItem>
-                        </Card>
-                    </ClickAwayListener>
+                    profile === null ?
+                        <Button color='inherit' style={{ backgroundColor: 'white', color: '#a32d58', padding: '5px', fontWeight: 'bold' }} onClick={() => { navigate('/login') }}>Login</Button>
+                        :
+
+                        <>
+                            <IconButton onClick={orderpage} color="inherit" style={{ backgroundColor: '#a32d58', color: 'white', marginLeft: '10px', padding: '5px' }}>
+                                <Badge badgeContent="3" color="secondary">
+                                    <ShoppingCartIcon />
+                                </Badge>
+                            </IconButton>
+
+
+
+                            <IconButton onClick={() => setShowMenu(true)} color="inherit" style={{ backgroundColor: '#a32d58', color: 'white', marginLeft: '10px', padding: '5px' }}>
+                                <AccountCircleRoundedIcon />
+                            </IconButton>
+
+                            {
+                                showMenu &&
+                                <ClickAwayListener onClickAway={() => setShowMenu(false)}>
+                                    <Card style={{
+                                        position: 'fixed',
+                                        top: '60px',
+                                        right: '10px'
+                                    }}>
+                                        <MenuItem style={{ color: '#a32d58', fontWeight: 'bold' }} onClick={profilepage}>Profile</MenuItem>
+                                        <MenuItem style={{ color: '#a32d58', fontWeight: 'bold' }} onClick={logoutnow}>Logout</MenuItem>
+                                    </Card>
+                                </ClickAwayListener>
+                            }
+
+                        </>
                 }
 
             </Toolbar >
-
-
 
         </AppBar >
     )

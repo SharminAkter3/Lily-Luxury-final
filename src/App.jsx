@@ -9,9 +9,11 @@ import AuthPage from "./page/AuthPage";
 import axios from "axios";
 import { domain, getheader } from "./env";
 import { useStateValue } from "./state/stateProvider";
+import OrderPage from "./page/OrderPage";
+import ProfilePage from "./page/ProfilePage";
 
 const App = () => {
-  const [{ }, dispatch] = useStateValue();
+  const [{ profile }, dispatch] = useStateValue();
   useEffect(() => {
     const getprofile = async () => {
       await axios({
@@ -23,6 +25,11 @@ const App = () => {
         dispatch({
           type: 'PRO',
           value: response.data
+        });
+      }).catch(_ => {
+        dispatch({
+          type: 'PRO',
+          value: null
         });
       })
     }
@@ -38,6 +45,15 @@ const App = () => {
         <Route exact path="/flower/:title/:id" element={<ProductDetails />} />
         <Route exact path="/query/:q" element={<SearchResultPage />} />
         <Route exact path="/login" element={<AuthPage />} />
+        {
+          profile !== null &&
+          <>
+            <Route exact path="/orders" element={<OrderPage />} />
+            <Route exact path="/profile/:username" element={<ProfilePage />} />
+          </>
+        }
+        <Route exact element={<AuthPage />} />
+
 
       </Routes>
     </BrowserRouter>
