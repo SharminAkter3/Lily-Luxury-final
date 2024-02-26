@@ -10,7 +10,7 @@ const Navbar = () => {
     const [text, setText] = useState('');
     const navigate = useNavigate();
     const search = () => {
-        navigate(`/query/q-${text}`);
+        navigate(`/query/${text}`);
     }
 
 
