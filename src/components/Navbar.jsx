@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded'
+import { useStateValue } from '../state/stateProvider';
 
 
 
 
 const Navbar = () => {
+    const [profile, { }] = useStateValue();
+    console.log('Navbar===', profile);
     const [text, setText] = useState('');
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();

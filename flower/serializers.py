@@ -77,3 +77,9 @@ class ProductViewSerializer(serializers.ModelSerializer):
             instance.flower, context={"request": request}
         ).data
         return response
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = "__all__"

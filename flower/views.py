@@ -5,6 +5,8 @@ from django.db.models import Q
 from .models import *
 from .serializers import *
 from django.utils import timezone
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 
 class CategoryProductView(APIView):
@@ -134,3 +136,17 @@ class SearchView(APIView):
 
         print(prod_obj)
         return Response(data)
+
+
+class ProfileView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    authentication_classes = [
+        TokenAuthentication,
+    ]
+
+    def get(self, request):
+        customer_obj = Customer.objects.get(user=request.user)
+        customer_ser = CustomerSerializer(customer_obj).data
+        return Response(customer_ser)
